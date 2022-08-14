@@ -20,9 +20,6 @@ def startTest():
 
 
 def login(**kwargs):
-    # if "name" in kwargs.keys():
-    #     driver.find_element(By.ID, kwargs["param"]).send_keys(kwargs["id"])
-
     if "id" in kwargs.keys():
         driver.find_element(By.ID, kwargs["param"]).send_keys(kwargs["id"])
 
@@ -42,9 +39,6 @@ def email_try_except(username, password):
         element1 = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID,
                                                                                    "SubmitLogin")))
         element1.click()
-        # ErrorPage = ""
-        # ErrorPage = driver.find_element(By.TAG_NAME, "h1").text
-        # if ErrorPage ==
         elem_page_heading = driver.find_element(By.CLASS_NAME, "page-heading")
         print(f'page-headinggggggggggg {elem_page_heading.text}')
         elemerror = driver.find_element(By.TAG_NAME, "ol")
@@ -122,6 +116,7 @@ def test_empty_email_valid_password():  # -> Error
     password = "tadddDm123R&"
     email_try_except(username, password)
 
+
 @pytest.mark.failed
 def test_hebrew_email_valid_password():  # -> Error
     '''
@@ -133,6 +128,7 @@ def test_hebrew_email_valid_password():  # -> Error
     username = "תמרסמארה"
     password = "tadddDm123R&"
     email_try_except(username, password)
+
 
 # @pytest.mark.passed
 # def test_valid_email_valid_password():  # -> Successful
@@ -153,12 +149,19 @@ def test_hebrew_email_valid_password():  # -> Error
 Check text boxes : 
 """
 
-def test_textbox_username():
+
+# def test_textbox_username():
+#     startTest()
+#     driver.find_element(By.ID, "email").send_keys("tamar.samara@gmail.com")
+#     driver.find_element(By.ID, "passwd").send_keys("tttt")
+#     msg = driver.find_element(By.XPATH, '//*[@id="login_form"]/div/div[1]').text
+#     assert msg == "form-group form-ok"
+#     driver.quit()
+
+def test_Forgot_your_password():
     startTest()
-    driver.find_element(By.ID, "email").send_keys("tamar.samara@gmail.com")
-    result = ""
-    result += driver.find_element(By.CLASS_NAME, "form-group").text
-    print(f'resuuuuulttt : {result}')
-    # form-group form-ok
-    # form-group form-error
+    driver.find_element(By.XPATH, '//*[@id="login_form"]/div/p[1]/a').click()
+    msg = driver.find_element(By.CLASS_NAME, "page-subheading").text
+    assert msg == "FORGOT YOUR PASSWORD?"
+    driver.quit()
 
